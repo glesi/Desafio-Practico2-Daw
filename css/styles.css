@@ -1,0 +1,47 @@
+body {
+    background-color: #f7f8f9;
+    font-family: 'Roboto', sans-serif;
+}
+
+#total-income{
+    background-color: #171941;
+    color: #fdf9f9;
+}
+
+.budget-card {
+    max-width: 600px;
+    background: rgb(254, 253, 253);
+    border-radius: 4px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+#expense-percentage{
+    background-color: #171941;
+    color: #f7f8f9;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.budget-card h2 {
+    font-size: 1.5rem;
+    
+}
+
+.balance-display {
+    font-size: 2rem;
+    color: #1e1f51;
+    
+}
+.transaction-box {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: #f5fbf8;
+    border-radius: 5px;
+    
+}
+.percentage-display {
+    font-size: 1rem;
+    margin: 20px;
+}
