@@ -7,26 +7,81 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/presupuesto.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="budget-card">
-            <h2 id="budget-title" class="text-center"></h2>
-            <div id="balance" class="balance-display text-center my-3">
-                + $0.00
+    <div class="grid-layout">
+        <!-- En este espacio trabajara la caja 1 -->
+        <div class="caja1">
+            <div class="container">
+                <div class="budget-card">
+                    <h2 id="budget-title" class="text-center"></h2>
+                    <div id="balance" class="balance-display text-center my-3">
+                        + $0.00
+                    </div>
+                    <div class="transaction-box" id="total-income">
+                        INGRESOS: + $00.000
+                    </div>
+                    <div class="transaction-box" id="total-expense">
+                        EGRESOS: - $00.00
+                    </div>
+                    <div class="percentage-display text-center">
+                        Porcentaje de gastos: <span id="expense-percentage">0%</span>
+                    </div>
+                </div>
             </div>
-            <div class="transaction-box" id="total-income">
-                INGRESOS: + $100.000
+        </div>    
+        <!-- En este espacio trabajara la caja 2 -->
+        <div class="caja2">
+            <h2>Transacción</h2>
+            <form id="transactionForm">
+                <div class="formField">
+                    Tipo de Transaccion
+                <input id="deposito" type="radio" name="transactionType" value="Ingreso">
+                <label for="deposito">Ingreso</label>
+                <input id="ingreso" type="radio" name="transactionType" value="Egreso">
+                <label for="ingreso">Egreso</label>
             </div>
-            <div class="transaction-box" id="total-expense">
-                EGRESOS: - $500.00
+            <div class="formField">
+                <label for="transactionDescription">
+                    Descripcion
+                </label>
+                <input id="transactionDescription" name="transactionDescription"
+                placeholder="Descripcion">
             </div>
-            <div class="percentage-display text-center">
-                Porcentaje de gastos: <span id="expense-percentage">0%</span>
+            <div class="formField">
+                <label for="transactionAmount">
+                    Monto
+                </label>
+                <input id="transactionAmount" type="number" name="transactionAmount"
+                placeholder="Monto">
+            </div>                
+            <div class="formField">  
+                    <button id="botonDeEnvio">Añadir</button>
             </div>
+        </form>
         </div>
-    </div>
-<script src="js/presupuesto.js"></script>
+        <!-- En este espacio trabajara la caja 3 -->
+        <div class="caja3">
+            <h2>Historial</h2>
+            <div>
+            <button class="Ingreso">Ingreso</button>            
+            <button class="Egreso">Egreso</button>
+            </div>
+            <div class="tableFormat">
+                <table id="transactionTable">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Descripcion</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>        
+                    </tbody>
+                </table>
+        </div>   
+    </div>     
 </body>
 </html>
 

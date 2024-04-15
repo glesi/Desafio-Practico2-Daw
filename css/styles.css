@@ -45,3 +45,49 @@ body {
     font-size: 1rem;
     margin: 20px;
 }
+/*Para dividir los 3 espacios de trabajo estoy usando grid layout 
+y asi poder trabajar mediante cajas 1,2 y 3*/
+.grid-layout{
+    height: 650px;
+    display: grid;
+    grid-template-areas: 'presupuesto presupuesto'
+                          'transaccion historial'; 
+}
+.caja1{
+    grid-area: presupuesto;
+    background-color: rgb(219, 219, 224);
+    border: 1px solid rgb(115, 115, 115);    
+    text-align: center;
+}
+.caja2{
+    grid-area: transaccion;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(117, 117, 117);
+    text-align: center;
+}
+.caja3{
+    grid-area: historial;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(113, 113, 113);
+    text-align: center;
+}
+td,th{
+    text-align: center;
+    padding: 10px;
+    border: solid rgb(74, 74, 74) 1px;
+    }
+    .tableFormat table{
+    margin: 10px auto;
+    }
+    h1{
+    text-align: center;
+    }
+    form{
+    text-align: center;   
+    }
+    .formField{
+    padding-bottom: 20px;
+    }
+    #botonDeEnvio{
+    font-size: 23px;
+    }
