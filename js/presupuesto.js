@@ -83,10 +83,6 @@ form.addEventListener("submit", function(event) {
     }
 });
 
-
-
-
-
     // Función para convertir los datos del formulario en un objeto de transacción
     function convertFormDataToTransactionObj(transactionFormData) {
         let transactionType = transactionFormData.get("transactionTipo");
