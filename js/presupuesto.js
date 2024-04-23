@@ -69,6 +69,9 @@ form.addEventListener("submit", function(event) {
             let transactionObj = convertFormDataToTransactionObj(transactionFormData);
             saveTransactionObj(transactionObj);
             insertRowInTransactionTable(transactionObj);
+
+            // Reiniciar el formulario para limpiar los campos
+            form.reset();
         }
     } else {
         // Muestra una alerta de SweetAlert indicando que se debe seleccionar una opción válida
@@ -79,6 +82,7 @@ form.addEventListener("submit", function(event) {
         });
     }
 });
+
 
 
 
