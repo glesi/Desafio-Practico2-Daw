@@ -1,88 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Configuracion del Navegador -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicación de Presupuesto</title>
+
+    <!-- Enlaces de Estilos y Fuentes-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/presupuesto.js"></script>
+
 </head>
 <body>
     <div class="grid-layout">
-        <!-- En este espacio trabajara la caja 1 -->
+
+        <!-- Caja 1 - Informacion General -->
         <div class="caja1">
             <div class="container">
                 <div class="budget-card">
                     <h2 id="budget-title" class="text-center"></h2>
-                    <div id="balance" class="balance-display text-center my-3">
-                        + $0.00
-                    </div>
-                    <div class="transaction-box" id="total-income">
-                        INGRESOS: + $00.000
-                    </div>
-                    <div class="transaction-box" id="total-expense">
-                        EGRESOS: - $00.00
-                    </div>
-                    <div class="percentage-display text-center">
-                        Porcentaje de gastos: <span id="expense-percentage">0%</span>
-                    </div>
+                    <div id="balance" class="balance-display text-center my-3">+ $0.00</div>
+                    <div class="transaction-box" id="total-income">INGRESOS: + $00.00</div>
+                    <div class="transaction-box" id="total-expense">EGRESOS: - $00.00</div>
+                    <div class="percentage-display text-center">Porcentaje de gastos: <span id="expense-percentage">0%</span></div>
                 </div>
             </div>
-        </div>    
-        <!-- En este espacio trabajara la caja 2 -->
+        </div>
+        
+        <!-- Caja 2 - Transacciones de Ingreso y Egreso-->
         <div class="caja2">
             <h2>Transacción</h2>
             <form id="transactionForm">
                 <div class="formField">
-                    Tipo de Transaccion
-                <input id="deposito" type="radio" name="transactionType" value="Ingreso">
-                <label for="deposito">Ingreso</label>
-                <input id="ingreso" type="radio" name="transactionType" value="Egreso">
-                <label for="ingreso">Egreso</label>
-            </div>
-            <div class="formField">
-                <label for="transactionDescription">
-                    Descripcion
-                </label>
-                <input id="transactionDescription" name="transactionDescription"
-                placeholder="Descripcion">
-            </div>
-            <div class="formField">
-                <label for="transactionAmount">
-                    Monto
-                </label>
-                <input id="transactionAmount" type="number" name="transactionAmount"
-                placeholder="Monto">
-            </div>                
-            <div class="formField">  
-                    <button id="botonDeEnvio">Añadir</button>
-            </div>
-        </form>
+                    <select class="tipoTransaccion" name="transactionTipo" id="transactionType">
+                        <option value="deafult" disabled selected>INGRESO - EGRESO</option>
+                        <option value="ingreso">INGRESO</option>
+                        <option value="egreso">EGRESO</option>
+                    </select>
+                </div>
+                <div class="formField">
+                    <input class="tipoTransaccion" id="transactionDescription" name="transactionDescription" placeholder="Descripcion">
+                </div>
+                <div class="formField">
+                    <input class="tipoTransaccion" id="transactionAmount" type="number" name="transactionAmount" placeholder="Monto" min="0" step="0.01">
+                </div>                
+                <div class="formField">  
+                    <button id="botonDeEnvio">Agregar</button>
+                </div>
+            </form>
         </div>
-        <!-- En este espacio trabajara la caja 3 -->
+
+        <!-- Caja 3 - Historial de Transacciones -->
         <div class="caja3">
             <h2>Historial</h2>
-            <div>
-            <button class="Ingreso">Ingreso</button>            
-            <button class="Egreso">Egreso</button>
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active" id="option1Label">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Ingresos
+                </label>
+                <label class="btn btn-primary" id="option2Label">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Egresos
+                </label>
             </div>
             <div class="tableFormat">
-                <table id="transactionTable">
+                <table id="transactionTable" class="table">
                     <thead>
                         <tr>
                             <th>Tipo</th>
-                            <th>Descripcion</th>
+                            <th>Descripción</th>
                             <th>Monto</th>
                         </tr>
                     </thead>
                     <tbody>        
                     </tbody>
                 </table>
-        </div>   
-    </div>     
+            </div>
+        </div>
+    </div>
+
+    <!-- script de funcionalidad-->
+    <script src="js/presupuesto.js"></script>
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
-
-

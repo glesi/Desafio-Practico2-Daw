@@ -1,7 +1,10 @@
+/* Configu */
 body {
     background-color: #f7f8f9;
     font-family: 'Roboto', sans-serif;
+    padding: 30px 80px 30px 80px;
 }
+
 
 #total-income{
     background-color: #171941;
@@ -58,19 +61,28 @@ y asi poder trabajar mediante cajas 1,2 y 3*/
     background-color: rgb(219, 219, 224);
     border: 1px solid rgb(115, 115, 115);    
     text-align: center;
+    padding: 15px;
 }
 .caja2{
     grid-area: transaccion;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(117, 117, 117);
     text-align: center;
+    padding: 15px;
 }
 .caja3{
     grid-area: historial;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(113, 113, 113);
     text-align: center;
+    padding: 15px;
 }
+
+.tableFormat {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 td,th{
     text-align: center;
     padding: 10px;
@@ -89,5 +101,17 @@ td,th{
     padding-bottom: 20px;
     }
     #botonDeEnvio{
-    font-size: 23px;
+    font-size: 16px;
+    background-color: #171941;
+    color: #fdf9f9;
+    border-radius: 5px;
+    padding: 0.5rem;
     }
+
+    .tipoTransaccion {
+        width: 80%;
+        padding: 5px;
+        text-align: center;
+        border-radius: 5px;
+    }
+    
