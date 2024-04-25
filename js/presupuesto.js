@@ -1,6 +1,9 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    
+    let transactions = [];
+    
     // Obtiene la fecha actual
     const now = new Date();
     // Array de nombres de meses en español
@@ -33,55 +36,55 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('expense-percentage').textContent = `${expensePercentage.toFixed(0)}%`;
     }
 
-// Event listener para el envío del formulario de transacción
-const form = document.getElementById("transactionForm");
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
+    // Event listener para el envío del formulario de transacción
+    const form = document.getElementById("transactionForm");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    // Obtiene el valor seleccionado del tipo de transacción
-    const transactionType = document.getElementById("transactionType").value;
+        // Obtiene el valor seleccionado del tipo de transacción
+        const transactionType = document.getElementById("transactionType").value;
 
-    // Verifica si se ha seleccionado una opción válida
-    if (transactionType === 'ingreso' || transactionType === 'egreso') {
-        // Si se selecciona una opción válida, procede con la validación de los demás campos
-        const transactionDescription = document.getElementById("transactionDescription").value;
-        const transactionAmount = parseFloat(document.getElementById("transactionAmount").value);
+        // Verifica si se ha seleccionado una opción válida
+        if (transactionType === 'ingreso' || transactionType === 'egreso') {
+            // Si se selecciona una opción válida, procede con la validación de los demás campos
+            const transactionDescription = document.getElementById("transactionDescription").value;
+            const transactionAmount = parseFloat(document.getElementById("transactionAmount").value);
 
-        // Verifica si el monto es mayor o igual a cero
-        if (isNaN(transactionAmount) || transactionAmount < 0) {
-            // Muestra una alerta de SweetAlert si el monto no es válido
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Por favor ingresa un monto válido (mayor o igual a cero)',
-            });
-        } else if (transactionDescription.trim() === '') {
-            // Verifica si la descripción está vacía
-            // Muestra una alerta de SweetAlert si la descripción está vacía
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Por favor completa todos los campos',
-            });
+            // Verifica si el monto es mayor o igual a cero
+            if (isNaN(transactionAmount) || transactionAmount < 0) {
+                // Muestra una alerta de SweetAlert si el monto no es válido
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Por favor ingresa un monto válido (mayor o igual a cero)',
+                });
+            } else if (transactionDescription.trim() === '') {
+                // Verifica si la descripción está vacía
+                // Muestra una alerta de SweetAlert si la descripción está vacía
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Por favor completa todos los campos',
+                });
+            } else {
+                // Si todos los campos están completos y el monto es válido, procede con la inserción de la transacción
+                let transactionFormData = new FormData(form);
+                let transactionObj = convertFormDataToTransactionObj(transactionFormData);
+                transactions.push(transactionObj); // Almacena la transacción aquí
+                addTransaction(transactionObj["transactionType"], transactionObj["transactionAmount"]); // Actualiza totales
+                updateView(); // Actualiza la vista basándose en el tab activo
+
+                form.reset();
+            }
         } else {
-            // Si todos los campos están completos y el monto es válido, procede con la inserción de la transacción
-            let transactionFormData = new FormData(form);
-            let transactionObj = convertFormDataToTransactionObj(transactionFormData);
-            saveTransactionObj(transactionObj);
-            insertRowInTransactionTable(transactionObj);
-
-            // Reiniciar el formulario para limpiar los campos
-            form.reset();
+            // Muestra una alerta de SweetAlert indicando que se debe seleccionar una opción válida
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor selecciona un tipo de transacción válido (Ingreso o Egreso)',
+            });
         }
-    } else {
-        // Muestra una alerta de SweetAlert indicando que se debe seleccionar una opción válida
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Por favor selecciona un tipo de transacción válido (Ingreso o Egreso)',
-        });
-    }
-});
+    });
 
     // Función para convertir los datos del formulario en un objeto de transacción
     function convertFormDataToTransactionObj(transactionFormData) {
@@ -94,49 +97,72 @@ form.addEventListener("submit", function(event) {
             "transactionAmount": transactionAmount,
         };
     }
-    
+
 
     // Función para insertar una nueva fila en la tabla de transacciones
-    function insertRowInTransactionTable(transactionObj) {
-        let transactionTableRef = document.getElementById("transactionTable");
-        let newTransactionRowRef = transactionTableRef.insertRow(-1);
+    function insertRowInTransactionTable(transactionObj, tbody) {
+        let newTransactionRowRef = tbody.insertRow(-1);
 
         let newTypeCellRef = newTransactionRowRef.insertCell(0);
         newTypeCellRef.textContent = transactionObj["transactionType"];
 
-        newTypeCellRef = newTransactionRowRef.insertCell(1);
-        newTypeCellRef.textContent = transactionObj["transactionDescription"];
+        let newDescriptionCellRef = newTransactionRowRef.insertCell(1);
+        newDescriptionCellRef.textContent = transactionObj["transactionDescription"];
 
-        newTypeCellRef = newTransactionRowRef.insertCell(2);
-        newTypeCellRef.textContent = "$" + transactionObj["transactionAmount"].toFixed(2);
-
-        // Llama a la función addTransaction para actualizar los totales
-        addTransaction(transactionObj["transactionType"], transactionObj["transactionAmount"]);
+        let newAmountCellRef = newTransactionRowRef.insertCell(2);
+        newAmountCellRef.textContent = "$" + transactionObj["transactionAmount"].toFixed(2);
     }
 
-    // Función para guardar la transacción (no implementada actualmente)
-    function saveTransactionObj(transactionObj) {
-        // Aquí puedes implementar el almacenamiento de la transacción, por ejemplo, en localStorage
-        // let transactionObjJSON = JSON.stringify(transactionObj);
-        // localStorage.setItem("transactionData", transactionObjJSON);
-        // Este es solo un ejemplo, asegúrate de implementarlo según tus necesidades
+    // Event listeners para los botones de radio
+    function showIngresos() {
+        const ingresos = transactions.filter(t => t.transactionType === 'ingreso');
+        updateTransactionTable(ingresos);
     }
 
-    // Ejemplo de transacciones predefinidas
-    addTransaction('ingreso', 100);
-    addTransaction('ingreso', 50);
-    addTransaction('ingreso', 50);
-    addTransaction('ingreso', 350);
-    addTransaction('egreso', 300);
-});
+    function showEgresos() {
+        const egresos = transactions.filter(t => t.transactionType === 'egreso');
+        updateTransactionTable(egresos);
+    }
 
-// Event listeners para los botones de radio
-document.getElementById("option1").addEventListener("click", function() {
-    document.getElementById("option1Label").classList.add("active");
-    document.getElementById("option2Label").classList.remove("active");
-});
+    // Actualiza la tabla de transacciones con las transacciones filtradas
+    function updateTransactionTable(filteredTransactions) {
+        const transactionTableRef = document.getElementById("transactionTable").getElementsByTagName('tbody')[0];
+        transactionTableRef.innerHTML = ''; // Limpia la tabla actual
 
-document.getElementById("option2").addEventListener("click", function() {
-    document.getElementById("option2Label").classList.add("active");
-    document.getElementById("option1Label").classList.remove("active");
+        filteredTransactions.forEach(transaction => {
+            insertRowInTransactionTable(transaction, transactionTableRef);
+        });
+    }
+
+    // Event listeners para los tabs
+    document.getElementById("showIngresos").addEventListener("click", function (event) {
+        event.preventDefault();
+        setActiveTab(this);
+        showIngresos();
+    });
+
+    document.getElementById("showEgresos").addEventListener("click", function (event) {
+        event.preventDefault();
+        setActiveTab(this);
+        showEgresos();
+    });
+
+    function setActiveTab(activeTabElement) {
+        document.querySelector('.nav-link.active').classList.remove('active');
+        activeTabElement.classList.add('active');
+    }
+
+    // Actualiza la tabla al cargar la página y cada vez que se añade una transacción
+    function updateView() {
+        if (document.querySelector('#showIngresos').classList.contains('active')) {
+            showIngresos();
+        } else {
+            showEgresos();
+        }
+    }
+
+    // Inicia la vista con las transacciones ingresos por defecto
+    setActiveTab(document.getElementById("showIngresos"));
+    showIngresos();
+    updateView();
 });

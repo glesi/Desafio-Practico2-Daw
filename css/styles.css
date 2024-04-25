@@ -6,7 +6,7 @@ body {
 }
 
 
-#total-income{
+#total-income {
     background-color: #171941;
     color: #fdf9f9;
 }
@@ -19,7 +19,7 @@ body {
     padding: 1rem;
 }
 
-#expense-percentage{
+#expense-percentage {
     background-color: #171941;
     color: #f7f8f9;
     border-radius: 5px;
@@ -28,49 +28,55 @@ body {
 
 .budget-card h2 {
     font-size: 1.5rem;
-    
+
 }
 
 .balance-display {
     font-size: 2rem;
     color: #1e1f51;
-    
+
 }
+
 .transaction-box {
     border: 1px solid #dee2e6;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     background-color: #f5fbf8;
     border-radius: 5px;
-    
+
 }
+
 .percentage-display {
     font-size: 1rem;
     margin: 20px;
 }
+
 /*Para dividir los 3 espacios de trabajo estoy usando grid layout 
 y asi poder trabajar mediante cajas 1,2 y 3*/
-.grid-layout{
+.grid-layout {
     height: 650px;
     display: grid;
     grid-template-areas: 'presupuesto presupuesto'
-                          'transaccion historial'; 
+        'transaccion historial';
 }
-.caja1{
+
+.caja1 {
     grid-area: presupuesto;
     background-color: rgb(219, 219, 224);
-    border: 1px solid rgb(115, 115, 115);    
+    border: 1px solid rgb(115, 115, 115);
     text-align: center;
     padding: 15px;
 }
-.caja2{
+
+.caja2 {
     grid-area: transaccion;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(117, 117, 117);
     text-align: center;
     padding: 15px;
 }
-.caja3{
+
+.caja3 {
     grid-area: historial;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(113, 113, 113);
@@ -83,35 +89,40 @@ y asi poder trabajar mediante cajas 1,2 y 3*/
     margin-right: 10px;
 }
 
-td,th{
+td,
+th {
     text-align: center;
     padding: 10px;
     border: solid rgb(74, 74, 74) 1px;
-    }
-    .tableFormat table{
+}
+
+.tableFormat table {
     margin: 10px auto;
-    }
-    h1{
+}
+
+h1 {
     text-align: center;
-    }
-    form{
-    text-align: center;   
-    }
-    .formField{
+}
+
+form {
+    text-align: center;
+}
+
+.formField {
     padding-bottom: 20px;
-    }
-    #botonDeEnvio{
+}
+
+#botonDeEnvio {
     font-size: 16px;
     background-color: #171941;
     color: #fdf9f9;
     border-radius: 5px;
     padding: 0.5rem;
-    }
+}
 
-    .tipoTransaccion {
-        width: 80%;
-        padding: 5px;
-        text-align: center;
-        border-radius: 5px;
-    }
-    
+.tipoTransaccion {
+    width: 80%;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
